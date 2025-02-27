@@ -24,6 +24,7 @@ app.use(cookieParser());
 
 const verifyToken = (req, res, next) => {
   const token = req?.cookies?.token;
+  console.log("token: ", token);
   if (!token) {
     return res.status(401).send({ message: "Unauthorized user" });
   }
@@ -205,6 +206,7 @@ async function run() {
     });
 
     app.get("/allMarathon/user/:email", verifyToken, async (req, res) => {
+      console.log("here");
       const email = req.params.email;
       const query = { email };
       const result = await MarathonCollection.find(query).toArray();
